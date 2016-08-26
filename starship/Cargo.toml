@@ -1,0 +1,6 @@
+[package]
+name = "starship"
+version = "0.1.0"
+
+[dependencies]
+rustc-serialize = "0.3"

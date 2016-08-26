@@ -1,0 +1,8 @@
+[package]
+name = "frontier"
+version = "0.1.0"
+
+[dependencies]
+orbclient = "0.1"
+orbfont = "0.1"
+starship = { path = "starship" }
