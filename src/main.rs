@@ -14,7 +14,7 @@ fn main(){
     let mut window = Window::new(100, 100, 640, 480, "Frontier").unwrap();
     let font = Font::from_path("res/FiraMono-Regular.ttf").unwrap();
 
-    let ship = starship::load("res/ship.json").unwrap();
+    let mut ship = starship::load("res/ship.json").unwrap();
 
     let mut block_kinds: BTreeMap<String, Image> = BTreeMap::new();
     for entry_result in fs::read_dir("res/blocks/").unwrap() {
@@ -37,6 +37,8 @@ fn main(){
     let mut mouse_down = false;
 
     'events: loop {
+        ship.update();
+
         let deck = &ship.decks[deck_i];
 
         let window_w = window.width();

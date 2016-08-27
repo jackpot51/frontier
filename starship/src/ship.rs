@@ -7,3 +7,11 @@ pub struct Ship {
     pub height: usize,
     pub decks: Vec<Deck>
 }
+
+impl Ship {
+    pub fn update(&mut self) {
+        for deck in self.decks.iter_mut() {
+            deck.update();
+        }
+    }
+}

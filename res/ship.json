@@ -107,7 +107,7 @@
                     "y": 1,
                     "kind": "Tank",
                     "data": {
-                        "resource": "Air",
+                        "resource": "air",
                         "current": "100",
                         "total": "100"
                     }
@@ -116,7 +116,13 @@
                     "x": 2,
                     "y": 2,
                     "kind": "Conduit",
-                    "data": {}
+                    "data": {
+                        "rate": "5",
+                        "air": "0",
+                        "electricity": "0",
+                        "fuel": "0",
+                        "water": "0"
+                    }
                 }
             ]
         },
