@@ -1,9 +1,14 @@
 extern crate orbclient;
 extern crate orbfont;
+extern crate orbimage;
 extern crate starship;
 
 use orbclient::{Color, EventOption, Window, K_UP, K_DOWN};
 use orbfont::Font;
+use orbimage::Image;
+
+use std::collections::BTreeMap;
+use std::fs;
 
 fn main(){
     let mut window = Window::new(100, 100, 640, 480, "Frontier").unwrap();
@@ -11,17 +16,31 @@ fn main(){
 
     let ship = starship::load("res/ship.json").unwrap();
 
+    let mut block_kinds: BTreeMap<String, Image> = BTreeMap::new();
+    for entry_result in fs::read_dir("res/blocks/").unwrap() {
+        let entry = entry_result.unwrap();
+        let path = entry.path();
+        if path.is_dir() {
+            let mut image_path = path.clone();
+            image_path.push("image.png");
+            if image_path.is_file() {
+                block_kinds.insert(entry.file_name().into_string().unwrap(), Image::from_path(&image_path).unwrap());
+            }
+        }
+    }
+
     assert!(ship.decks.len() > 0);
 
     println!("{:#?}", ship);
 
     let mut deck_i = 0;
+    let mut mouse_down = false;
 
     'events: loop {
         let deck = &ship.decks[deck_i];
 
         let window_w = window.width();
-        let window_h = window.height();
+        //let window_h = window.height();
 
         window.set(Color::rgb(255, 255, 255));
 
@@ -34,10 +53,21 @@ fn main(){
         for block in deck.blocks.iter() {
             let x = block.x as i32 * 32;
             let y = block.y as i32 * 32 + 32;
-            let w = block.w as u32 * 32;
-            let h = block.h as u32 * 32;
-            window.rect(x, y, w, h, Color::rgb(128, 128, 128));
-            font.render(&block.kind, 16.0).draw(&mut window, x, y, Color::rgb(0, 0, 0));
+            if let Some(image) = block_kinds.get(&block.kind) {
+                image.draw(&mut window, x, y);
+            } else {
+                window.rect(x, y, 32, 32, Color::rgb(128, 128, 128));
+                font.render(&block.kind, 16.0).draw(&mut window, x, y, Color::rgb(0, 0, 0));
+            }
+
+            if block.kind == "Tank" {
+                if let Some(resource) = block.data.get("resource") {
+                    let text = font.render(resource, 16.0);
+                    let text_x = x + (32 - text.width()) as i32/2;
+                    let text_y = y + (32 - text.height()) as i32/2;
+                    text.draw(&mut window, text_x, text_y, Color::rgb(0, 0, 0));
+                }
+            }
         }
 
         window.sync();
@@ -54,6 +84,21 @@ fn main(){
                         },
                         _ => ()
                     }
+                },
+                EventOption::Mouse(mouse_event) => if mouse_event.left_button {
+                    if ! mouse_down {
+                        println!("Click {}, {}", mouse_event.x, mouse_event.y);
+                        for block in deck.blocks.iter() {
+                            let x = block.x as i32 * 32;
+                            let y = block.y as i32 * 32 + 32;
+                            if mouse_event.x >= x && mouse_event.x < x + 32 && mouse_event.y >= y && mouse_event.y < y + 32 {
+                                println!("    {:?}", block);
+                            }
+                        }
+                    }
+                    mouse_down = true;
+                } else {
+                    mouse_down = false;
                 },
                 EventOption::Quit(_quit_event) => break 'events,
                 _ => ()

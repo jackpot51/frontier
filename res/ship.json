@@ -9,12 +9,114 @@
                 {
                     "x": 0,
                     "y": 0,
-                    "w": 1,
-                    "h": 1,
-                    "kind": "Elevator",
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 1,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 2,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 3,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 1,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 2,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 3,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 2,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 3,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 1,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 2,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 3,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 2,
+                    "y": 1,
+                    "kind": "Tank",
                     "data": {
-                        "deck": "Deck B"
+                        "resource": "Air",
+                        "current": "100",
+                        "total": "100"
                     }
+                },
+                {
+                    "x": 2,
+                    "y": 2,
+                    "kind": "Conduit",
+                    "data": {}
                 }
             ]
         },
@@ -24,12 +126,98 @@
                 {
                     "x": 0,
                     "y": 0,
-                    "w": 2,
-                    "h": 1,
-                    "kind": "Stairwell",
-                    "data": {
-                        "deck": "Deck A"
-                    }
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 1,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 2,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 3,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 0,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 1,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 2,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 3,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 4,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 1,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 2,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 3,
+                    "y": 0,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 1,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 2,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
+                    "x": 3,
+                    "y": 4,
+                    "kind": "Hull",
+                    "data": {}
                 }
             ]
         }

@@ -5,4 +5,5 @@ version = "0.1.0"
 [dependencies]
 orbclient = "0.1"
 orbfont = "0.1"
+orbimage = { git = "https://github.com/redox-os/orbimage.git" }
 starship = { path = "starship" }
