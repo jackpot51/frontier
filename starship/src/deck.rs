@@ -160,7 +160,7 @@ impl Deck {
         for change in changes {
             redraw = true;
 
-            let amount = change.pressure.max(0.0).min(1.0) * nodes[change.i].capacity.min(nodes[change.j].capacity);
+            let amount = change.pressure.max(0.0).min(1.0) * nodes[change.i].amount.min(nodes[change.j].capacity - nodes[change.j].amount);
             nodes[change.i].amount -= amount;
             nodes[change.j].amount += amount;
         }
