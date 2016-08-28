@@ -115,11 +115,21 @@
                     "data": {}
                 },
                 {
-                    "x": 2,
+                    "x": 1,
                     "y": 1,
                     "kind": "Tank",
                     "data": {
                         "resource": "air",
+                        "amount": "100",
+                        "capacity": "100"
+                    }
+                },
+                {
+                    "x": 3,
+                    "y": 1,
+                    "kind": "Tank",
+                    "data": {
+                        "resource": "water",
                         "amount": "100",
                         "capacity": "100"
                     }
@@ -154,6 +164,16 @@
                     "kind": "Tank",
                     "data": {
                         "resource": "air",
+                        "amount": "0",
+                        "capacity": "100"
+                    }
+                },
+                {
+                    "x": 1,
+                    "y": 4,
+                    "kind": "Tank",
+                    "data": {
+                        "resource": "water",
                         "amount": "0",
                         "capacity": "100"
                     }

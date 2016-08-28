@@ -117,9 +117,11 @@ fn main(){
                             match key_event.scancode {
                                 K_UP => if deck_i + 1 < deck_len {
                                     deck_i += 1;
+                                    redraw.store(true, Ordering::SeqCst);
                                 },
                                 K_DOWN => if deck_i > 0 {
                                     deck_i -= 1;
+                                    redraw.store(true, Ordering::SeqCst);
                                 },
                                 K_ESC => running.store(false, Ordering::SeqCst),
                                 _ => ()
@@ -142,8 +144,12 @@ fn main(){
                                 let x = max(mouse_event.x/32, 0) as usize;
                                 let y = max((mouse_event.y - 32)/32, 0) as usize;
 
-                                deck.blocks[i].x = x;
-                                deck.blocks[i].y = y;
+                                let block = &mut deck.blocks[i];
+                                if block.x != x || block.y != y {
+                                    block.x = x;
+                                    block.y = y;
+                                    redraw.store(true, Ordering::SeqCst);
+                                }
                             }
                             mouse_down = true;
                         } else {
