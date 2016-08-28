@@ -17,9 +17,12 @@ struct Node {
 }
 
 impl Node {
-    fn adjacent(&self, other: &Node) -> bool {
-        return (self.x == other.x || self.x + 1 == other.x || self.x == other.x + 1)
-            && (self.y == other.y || self.y + 1 == other.y || self.y == other.y + 1);
+    fn connected(&self, other: &Node) -> bool {
+        return (self.x == other.x && self.y == other.y)      // same block
+            || (self.x + 1 == other.x && self.y == other.y)  // to the left
+            || (self.x == other.x + 1 && self.y == other.y)  // to the right
+            || (self.x == other.x && self.y + 1 == other.y)  // above
+            || (self.x == other.x && self.y == other.y + 1); // below
     }
 
     fn pressure(&self) -> f32 {
@@ -88,7 +91,7 @@ impl Deck {
             for j in 0 .. nodes.len() {
                 if j != i {
                     let b = &nodes[j];
-                    if a.adjacent(b) && a.resource == b.resource && a.pressure() > b.pressure() {
+                    if a.connected(b) && a.resource == b.resource && a.pressure() > b.pressure() {
                         //println!("{}, {} > {}, {}. {} > {}. {} > {}", a.x, a.y, b.x, b.y, i, j, a.pressure(), b.pressure());
                         let difference = (a.pressure() - b.pressure())/2.0;
                         node_changes.push((j, difference));

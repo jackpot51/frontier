@@ -8,6 +8,7 @@ use orbfont::Font;
 use orbimage::Image;
 
 use std::collections::BTreeMap;
+use std::cmp::max;
 use std::fs;
 use std::sync::{Arc, Mutex};
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -54,12 +55,15 @@ fn main(){
     });
 
     let mut deck_i = 0;
+    let mut dragging = None;
     let mut mouse_down = false;
 
     while running.load(Ordering::SeqCst) {
         {
-            let ship = ship_lock.lock().unwrap();
-            let deck = &ship.decks[deck_i];
+            let mut ship = ship_lock.lock().unwrap();
+            let name = ship.name.clone();
+            let deck_len = ship.decks.len();
+            let deck = &mut ship.decks[deck_i];
 
             if redraw.load(Ordering::SeqCst) {
                 redraw.store(false, Ordering::SeqCst);
@@ -69,7 +73,7 @@ fn main(){
 
                 window.set(Color::rgb(255, 255, 255));
 
-                let title = font.render(&format!("{} - {} - {}", ship.name, deck_i, deck.name), 24.0);
+                let title = font.render(&format!("{} - {} - {}", name, deck_i, deck.name), 24.0);
                 let title_x = (window_w - title.width()) as i32/2;
                 title.draw(&mut window, title_x, 0, Color::rgb(0, 0, 0));
 
@@ -111,7 +115,7 @@ fn main(){
                     match event.to_option() {
                         EventOption::Key(key_event) => if key_event.pressed {
                             match key_event.scancode {
-                                K_UP => if deck_i + 1 < ship.decks.len() {
+                                K_UP => if deck_i + 1 < deck_len {
                                     deck_i += 1;
                                 },
                                 K_DOWN => if deck_i > 0 {
@@ -124,16 +128,26 @@ fn main(){
                         EventOption::Mouse(mouse_event) => if mouse_event.left_button {
                             if ! mouse_down {
                                 println!("Click {}, {}", mouse_event.x, mouse_event.y);
-                                for block in deck.blocks.iter() {
+                                for (i, block) in deck.blocks.iter().enumerate() {
                                     let x = block.x as i32 * 32;
                                     let y = block.y as i32 * 32 + 32;
                                     if mouse_event.x >= x && mouse_event.x < x + 32 && mouse_event.y >= y && mouse_event.y < y + 32 {
+                                        if dragging.is_none() {
+                                            dragging = Some(i);
+                                        }
                                         println!("    {:?}", block);
                                     }
                                 }
+                            } else if let Some(i) = dragging {
+                                let x = max(mouse_event.x/32, 0) as usize;
+                                let y = max((mouse_event.y - 32)/32, 0) as usize;
+
+                                deck.blocks[i].x = x;
+                                deck.blocks[i].y = y;
                             }
                             mouse_down = true;
                         } else {
+                            dragging = None;
                             mouse_down = false;
                         },
                         EventOption::Quit(_quit_event) => running.store(false, Ordering::SeqCst),

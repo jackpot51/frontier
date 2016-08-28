@@ -37,6 +37,12 @@
                     "data": {}
                 },
                 {
+                    "x": 0,
+                    "y": 5,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
                     "x": 4,
                     "y": 0,
                     "kind": "Hull",
@@ -67,6 +73,12 @@
                     "data": {}
                 },
                 {
+                    "x": 4,
+                    "y": 5,
+                    "kind": "Hull",
+                    "data": {}
+                },
+                {
                     "x": 1,
                     "y": 0,
                     "kind": "Hull",
@@ -86,19 +98,19 @@
                 },
                 {
                     "x": 1,
-                    "y": 4,
+                    "y": 5,
                     "kind": "Hull",
                     "data": {}
                 },
                 {
                     "x": 2,
-                    "y": 4,
+                    "y": 5,
                     "kind": "Hull",
                     "data": {}
                 },
                 {
                     "x": 3,
-                    "y": 4,
+                    "y": 5,
                     "kind": "Hull",
                     "data": {}
                 },
@@ -127,6 +139,18 @@
                 {
                     "x": 2,
                     "y": 3,
+                    "kind": "Conduit",
+                    "data": {
+                        "capacity": "5",
+                        "air": "0",
+                        "electricity": "0",
+                        "fuel": "0",
+                        "water": "0"
+                    }
+                },
+                {
+                    "x": 3,
+                    "y": 4,
                     "kind": "Tank",
                     "data": {
                         "resource": "air",
