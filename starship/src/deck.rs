@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use block::{Block, BlockResource};
+use block::Block;
 
 #[derive(Clone, Debug, RustcDecodable, RustcEncodable)]
 pub struct Deck<'a> {
