@@ -117,6 +117,114 @@
                 {
                     "x": 1,
                     "y": 1,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 2,
+                    "y": 1,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 3,
+                    "y": 1,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 1,
+                    "y": 2,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 2,
+                    "y": 2,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 3,
+                    "y": 2,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 1,
+                    "y": 3,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 2,
+                    "y": 3,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 3,
+                    "y": 3,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 1,
+                    "y": 4,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 2,
+                    "y": 4,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 3,
+                    "y": 4,
+                    "kind": "Floor",
+                    "data": {
+                        "free_air": "0",
+                        "capacity": "5"
+                    }
+                },
+                {
+                    "x": 1,
+                    "y": 1,
                     "kind": "Tank",
                     "data": {
                         "resource": "air",
@@ -166,6 +274,16 @@
                         "resource": "air",
                         "amount": "0",
                         "capacity": "100"
+                    }
+                },
+                {
+                    "x": 2,
+                    "y": 4,
+                    "kind": "Vent",
+                    "data": {
+                        "air": "0",
+                        "free_air": "0",
+                        "capacity": "5"
                     }
                 },
                 {

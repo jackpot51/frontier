@@ -53,7 +53,7 @@ impl Deck {
         let mut nodes = vec![];
 
         // Create nodes from blocks
-        for (i, block) in self.blocks.iter().enumerate() {
+        for (i, mut block) in self.blocks.iter_mut().enumerate() {
             match block.kind.as_str() {
                 // Find tanks and establish initial resource availability
                 "Tank" =>  {
@@ -77,6 +77,50 @@ impl Deck {
                         capacity: block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0)
                     });
                 },
+                // Vents transfer air to a room
+                "Vent" => {
+                    let mut air = block.data.get("air").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0);
+                    let mut free_air = block.data.get("free_air").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0);
+                    let capacity = block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0);
+
+                    if air > 0.0 && free_air < capacity {
+                        let amount = air.min(capacity - free_air);
+                        air -= amount;
+                        free_air += amount;
+
+                        block.data.insert("air".to_string(), format!("{}", air));
+                        block.data.insert("free_air".to_string(), format!("{}", free_air));
+                    }
+
+                    nodes.push(Node {
+                        i: i,
+                        x: block.x,
+                        y: block.y,
+                        resource: "air".to_string(),
+                        amount: air,
+                        capacity: capacity
+                    });
+
+                    nodes.push(Node {
+                        i: i,
+                        x: block.x,
+                        y: block.y,
+                        resource: "free_air".to_string(),
+                        amount: free_air,
+                        capacity: capacity
+                    });
+                },
+                // Floors require air
+                "Floor" => {
+                    nodes.push(Node {
+                        i: i,
+                        x: block.x,
+                        y: block.y,
+                        resource: "free_air".to_string(),
+                        amount: block.data.get("free_air").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0),
+                        capacity: block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0)
+                    });
+                }
                 _ => (),
             }
         }
@@ -87,7 +131,7 @@ impl Deck {
             // Calculate changes for this node
             let a = &nodes[i];
             let mut node_changes = vec![];
-            let mut total = 0.0;
+            //let mut total = 0.0;
             for j in 0 .. nodes.len() {
                 if j != i {
                     let b = &nodes[j];
@@ -95,7 +139,7 @@ impl Deck {
                         //println!("{}, {} > {}, {}. {} > {}. {} > {}", a.x, a.y, b.x, b.y, i, j, a.pressure(), b.pressure());
                         let difference = (a.pressure() - b.pressure())/2.0;
                         node_changes.push((j, difference));
-                        total += difference;
+                        //total += difference;
                     }
                 }
             }
@@ -116,7 +160,7 @@ impl Deck {
         for change in changes {
             redraw = true;
 
-            let amount = change.pressure * nodes[change.i].capacity.min(nodes[change.j].capacity);
+            let amount = change.pressure.max(0.0).min(1.0) * nodes[change.i].capacity.min(nodes[change.j].capacity);
             nodes[change.i].amount -= amount;
             nodes[change.j].amount += amount;
         }
@@ -130,9 +174,9 @@ impl Deck {
                     block.data.insert("amount".to_string(), format!("{}", node.amount));
                 },
                 // Conduits transfer resources of all types, up to a certain rate
-                "Conduit" => {
+                "Conduit" | "Vent" | "Floor" => {
                     block.data.insert(node.resource, format!("{}", node.amount));
-                },
+                }
                 _ => (),
             }
         }

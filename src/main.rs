@@ -99,6 +99,20 @@ fn main(){
                             let text = font.render(amount, 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
+                    } else if block.kind == "Vent" {
+                        if let Some(amount) = block.data.get("air") {
+                            let text = font.render(amount, 16.0);
+                            text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
+                        }
+                        if let Some(amount) = block.data.get("free_air") {
+                            let text = font.render(amount, 16.0);
+                            text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
+                        }
+                    } else if block.kind == "Floor" {
+                        if let Some(amount) = block.data.get("free_air") {
+                            let text = font.render(amount, 16.0);
+                            text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
+                        }
                     }
                 }
 
@@ -134,9 +148,7 @@ fn main(){
                                     let x = block.x as i32 * 32;
                                     let y = block.y as i32 * 32 + 32;
                                     if mouse_event.x >= x && mouse_event.x < x + 32 && mouse_event.y >= y && mouse_event.y < y + 32 {
-                                        if dragging.is_none() {
-                                            dragging = Some(i);
-                                        }
+                                        dragging = Some(i);
                                         println!("    {:?}", block);
                                     }
                                 }
