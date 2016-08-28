@@ -1,22 +1,24 @@
-use block::Block;
+use std::borrow::Cow;
+
+use block::{Block, BlockResource};
 
 #[derive(Clone, Debug, RustcDecodable, RustcEncodable)]
-pub struct Deck {
+pub struct Deck<'a> {
     pub name: String,
-    pub blocks: Vec<Block>
+    pub blocks: Vec<Block<'a>>
 }
 
 #[derive(Debug)]
-struct Node {
+struct Node<'a> {
     i: usize,
     x: usize,
     y: usize,
-    resource: String,
+    resource: Cow<'a, str>,
     amount: f32,
     capacity: f32,
 }
 
-impl Node {
+impl<'a> Node<'a> {
     fn connected(&self, other: &Node) -> bool {
         return (self.x == other.x && self.y == other.y)      // same block
             || (self.x + 1 == other.x && self.y == other.y)  // to the left
@@ -37,7 +39,7 @@ struct Change {
     pressure: f32
 }
 
-impl Deck {
+impl<'a> Deck<'a> {
     /// # Update the deck
     /// - First, identify resource movement using the following algorithm, repeated until complete:
     ///   - Fill conduits from connected tanks until rate is fulfilled or tanks are drained
@@ -49,79 +51,41 @@ impl Deck {
     pub fn update(&mut self) -> bool {
         let mut redraw = false;
 
-        let resources = ["air", "electricity", "fuel", "water"];
         let mut nodes = vec![];
 
         // Create nodes from blocks
         for (i, mut block) in self.blocks.iter_mut().enumerate() {
-            match block.kind.as_str() {
-                // Find tanks and establish initial resource availability
-                "Tank" =>  {
-                    nodes.push(Node {
-                        i: i,
-                        x: block.x,
-                        y: block.y,
-                        resource: block.data.get("resource").map_or("", |s| &s).to_string(),
-                        amount: block.data.get("amount").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0),
-                        capacity: block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0)
-                    });
-                },
-                // Conduits transfer resources of all types, up to a certain rate
-                "Conduit" => for resource in resources.iter() {
-                    nodes.push(Node {
-                        i: i,
-                        x: block.x,
-                        y: block.y,
-                        resource: resource.to_string(),
-                        amount: block.data.get(*resource).map_or("", |s| &s).parse::<f32>().unwrap_or(0.0),
-                        capacity: block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0)
-                    });
-                },
-                // Vents transfer air to a room
-                "Vent" => {
-                    let mut air = block.data.get("air").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0);
-                    let mut free_air = block.data.get("free_air").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0);
-                    let capacity = block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0);
-
+            // Vents transfer air to a room
+            if block.kind == "Vent" {
+                if block.resources.contains_key("air") && block.resources.contains_key("free_air") {
+                    let mut air = block.resources["air"].amount;
+                    let mut free_air = block.resources["free_air"].amount;
+                    let capacity = block.resources["free_air"].capacity;
                     if air > 0.0 && free_air < capacity {
                         let amount = air.min(capacity - free_air);
                         air -= amount;
                         free_air += amount;
 
-                        block.data.insert("air".to_string(), format!("{}", air));
-                        block.data.insert("free_air".to_string(), format!("{}", free_air));
+                        if let Some(mut resource) = block.resources.get_mut("air") {
+                            resource.amount = air;
+                        }
+
+                        if let Some(mut resource) = block.resources.get_mut("free_air") {
+                            resource.amount = free_air;
+                        }
                     }
-
-                    nodes.push(Node {
-                        i: i,
-                        x: block.x,
-                        y: block.y,
-                        resource: "air".to_string(),
-                        amount: air,
-                        capacity: capacity
-                    });
-
-                    nodes.push(Node {
-                        i: i,
-                        x: block.x,
-                        y: block.y,
-                        resource: "free_air".to_string(),
-                        amount: free_air,
-                        capacity: capacity
-                    });
-                },
-                // Floors require air
-                "Floor" => {
-                    nodes.push(Node {
-                        i: i,
-                        x: block.x,
-                        y: block.y,
-                        resource: "free_air".to_string(),
-                        amount: block.data.get("free_air").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0),
-                        capacity: block.data.get("capacity").map_or("", |s| &s).parse::<f32>().unwrap_or(0.0)
-                    });
                 }
-                _ => (),
+            }
+
+            for (name, resource) in block.resources.iter() {
+                nodes.push(Node {
+                    i: i,
+                    x: block.x,
+                    y: block.y,
+                    resource: name.clone(),
+                    amount: resource.amount,
+                    capacity: resource.capacity
+                });
             }
         }
 
@@ -167,17 +131,8 @@ impl Deck {
 
         // Update blocks from nodes
         for node in nodes {
-            let block = &mut self.blocks[node.i];
-            match block.kind.as_str() {
-                // Find tanks and establish initial resource availability
-                "Tank" =>  {
-                    block.data.insert("amount".to_string(), format!("{}", node.amount));
-                },
-                // Conduits transfer resources of all types, up to a certain rate
-                "Conduit" | "Vent" | "Floor" => {
-                    block.data.insert(node.resource, format!("{}", node.amount));
-                }
-                _ => (),
+            if let Some(mut resource) = self.blocks[node.i].resources.get_mut(&node.resource) {
+                resource.amount = node.amount;
             }
         }
 

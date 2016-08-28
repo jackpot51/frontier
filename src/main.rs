@@ -90,27 +90,25 @@ fn main(){
                     }
 
                     if block.kind == "Tank" {
-                        if let Some(resource) = block.data.get("resource") {
-                            let text = font.render(resource, 16.0);
+                        if let Some((name, resource)) = block.resources.iter().next() {
+                            let text = font.render(name, 16.0);
                             text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
-                        }
 
-                        if let Some(amount) = block.data.get("amount") {
-                            let text = font.render(amount, 16.0);
+                            let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
                     } else if block.kind == "Vent" {
-                        if let Some(amount) = block.data.get("air") {
-                            let text = font.render(amount, 16.0);
+                        if let Some(resource) = block.resources.get("air") {
+                            let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
                         }
-                        if let Some(amount) = block.data.get("free_air") {
-                            let text = font.render(amount, 16.0);
+                        if let Some(resource) = block.resources.get("free_air") {
+                            let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
                     } else if block.kind == "Floor" {
-                        if let Some(amount) = block.data.get("free_air") {
-                            let text = font.render(amount, 16.0);
+                        if let Some(resource) = block.resources.get("free_air") {
+                            let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
                     }

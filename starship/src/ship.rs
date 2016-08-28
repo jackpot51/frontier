@@ -1,14 +1,14 @@
 use deck::Deck;
 
 #[derive(Clone, Debug, RustcDecodable, RustcEncodable)]
-pub struct Ship {
+pub struct Ship<'a> {
     pub name: String,
     pub width: usize,
     pub height: usize,
-    pub decks: Vec<Deck>
+    pub decks: Vec<Deck<'a>>
 }
 
-impl Ship {
+impl<'a> Ship<'a> {
     pub fn update(&mut self) -> bool {
         let mut redraw = false;
         for deck in self.decks.iter_mut() {

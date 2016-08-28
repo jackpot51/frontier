@@ -10,290 +10,289 @@
                     "x": 0,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 1,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 2,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 3,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 5,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 1,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 2,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 3,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 5,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 1,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 2,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 3,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 1,
                     "y": 5,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 2,
                     "y": 5,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 3,
                     "y": 5,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 1,
                     "y": 1,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 2,
                     "y": 1,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 3,
                     "y": 1,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 1,
                     "y": 2,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 2,
                     "y": 2,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 3,
                     "y": 2,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 1,
                     "y": 3,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 2,
                     "y": 3,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 3,
                     "y": 3,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 1,
                     "y": 4,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 2,
                     "y": 4,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 3,
                     "y": 4,
                     "kind": "Floor",
-                    "data": {
-                        "free_air": "0",
-                        "capacity": "5"
+                    "resources": {
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 1,
                     "y": 1,
                     "kind": "Tank",
-                    "data": {
-                        "resource": "air",
-                        "amount": "100",
-                        "capacity": "100"
-                    }
-                },
-                {
-                    "x": 3,
-                    "y": 1,
-                    "kind": "Tank",
-                    "data": {
-                        "resource": "water",
-                        "amount": "100",
-                        "capacity": "100"
+                    "resources": {
+                        "air": {
+                            "amount": 100,
+                            "capacity": 100
+                        }
                     }
                 },
                 {
                     "x": 2,
                     "y": 2,
                     "kind": "Conduit",
-                    "data": {
-                        "capacity": "5",
-                        "air": "0",
-                        "electricity": "0",
-                        "fuel": "0",
-                        "water": "0"
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 3,
-                    "kind": "Conduit",
-                    "data": {
-                        "capacity": "5",
-                        "air": "0",
-                        "electricity": "0",
-                        "fuel": "0",
-                        "water": "0"
-                    }
-                },
-                {
-                    "x": 3,
-                    "y": 4,
-                    "kind": "Tank",
-                    "data": {
-                        "resource": "air",
-                        "amount": "0",
-                        "capacity": "100"
+                    "resources": {
+                        "air": {
+                            "amount": 0,
+                            "capacity": 5
+                        },
+                        "electricity": {
+                            "amount": 0,
+                            "capacity": 5
+                        },
+                        "fuel": {
+                            "amount": 0,
+                            "capacity": 5
+                        },
+                        "water": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 },
                 {
                     "x": 2,
                     "y": 4,
                     "kind": "Vent",
-                    "data": {
-                        "air": "0",
-                        "free_air": "0",
-                        "capacity": "5"
-                    }
-                },
-                {
-                    "x": 1,
-                    "y": 4,
-                    "kind": "Tank",
-                    "data": {
-                        "resource": "water",
-                        "amount": "0",
-                        "capacity": "100"
+                    "resources": {
+                        "air": {
+                            "amount": 0,
+                            "capacity": 5
+                        },
+                        "free_air": {
+                            "amount": 0,
+                            "capacity": 5
+                        }
                     }
                 }
             ]
@@ -305,97 +304,97 @@
                     "x": 0,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 1,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 2,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 3,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 0,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 1,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 2,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 3,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 4,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 1,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 2,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 3,
                     "y": 0,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 1,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 2,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 },
                 {
                     "x": 3,
                     "y": 4,
                     "kind": "Hull",
-                    "data": {}
+                    "resources": {}
                 }
             ]
         }
