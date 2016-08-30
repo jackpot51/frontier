@@ -1,402 +1,396 @@
 {
-    "name": "A Ship",
-    "width": 8,
-    "height": 8,
-    "decks": [
+  "name": "A Ship",
+  "width": 8,
+  "height": 8,
+  "decks": [
+    {
+      "name": "Deck A",
+      "blocks": [
         {
-            "name": "Deck A",
-            "blocks": [
-                {
-                    "x": 0,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 1,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 2,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 3,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 5,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 1,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 2,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 3,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 5,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 1,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 2,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 3,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 1,
-                    "y": 5,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 2,
-                    "y": 5,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 3,
-                    "y": 5,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 1,
-                    "y": 1,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 1,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 3,
-                    "y": 1,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 1,
-                    "y": 2,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 2,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 3,
-                    "y": 2,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 1,
-                    "y": 3,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 3,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 3,
-                    "y": 3,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 1,
-                    "y": 4,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 4,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 3,
-                    "y": 4,
-                    "kind": "Floor",
-                    "resources": {
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 1,
-                    "y": 1,
-                    "kind": "Tank",
-                    "resources": {
-                        "air": {
-                            "amount": 100,
-                            "capacity": 100
-                        }
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 2,
-                    "kind": "Conduit",
-                    "resources": {
-                        "air": {
-                            "amount": 0,
-                            "capacity": 5
-                        },
-                        "electricity": {
-                            "amount": 0,
-                            "capacity": 5
-                        },
-                        "fuel": {
-                            "amount": 0,
-                            "capacity": 5
-                        },
-                        "water": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                },
-                {
-                    "x": 2,
-                    "y": 4,
-                    "kind": "Vent",
-                    "resources": {
-                        "air": {
-                            "amount": 0,
-                            "capacity": 5
-                        },
-                        "free_air": {
-                            "amount": 0,
-                            "capacity": 5
-                        }
-                    }
-                }
-            ]
+          "x": 10,
+          "y": 5,
+          "kind": "Hull",
+          "resources": {}
         },
         {
-            "name": "Deck B",
-            "blocks": [
-                {
-                    "x": 0,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 1,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 2,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 3,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 0,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 1,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 2,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 3,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 4,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 1,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 2,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 3,
-                    "y": 0,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 1,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 2,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                },
-                {
-                    "x": 3,
-                    "y": 4,
-                    "kind": "Hull",
-                    "resources": {}
-                }
-            ]
+          "x": 10,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 7,
+          "y": 9,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 8,
+          "y": 9,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 9,
+          "y": 9,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 10,
+          "y": 9,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 10,
+          "y": 8,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 6,
+          "y": 9,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230161488056183,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230159997940063,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.1623007208108902,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230027377605438,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.162301167845726,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230159997940063,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230027377605438,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.1623007357120514,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 7,
+          "y": 7,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.1623007208108902,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230203211307526,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.162301167845726,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "kind": "Floor",
+          "resources": {
+            "free_air": {
+              "amount": 0.16230115294456482,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 0,
+          "kind": "Tank",
+          "resources": {
+            "air": {
+              "amount": 100.0,
+              "capacity": 100.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 3,
+          "kind": "Conduit",
+          "resources": {
+            "air": {
+              "amount": 0.0,
+              "capacity": 5.0
+            },
+            "electricity": {
+              "amount": 0.0,
+              "capacity": 5.0
+            },
+            "fuel": {
+              "amount": 0.0,
+              "capacity": 5.0
+            },
+            "water": {
+              "amount": 0.0,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 0.0,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 0.16230247914791107,
+              "capacity": 5.0
+            }
+          }
         }
-    ]
+      ]
+    },
+    {
+      "name": "Deck B",
+      "blocks": [
+        {
+          "x": 0,
+          "y": 0,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 4,
+          "y": 0,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 4,
+          "y": 1,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "kind": "Hull",
+          "resources": {}
+        }
+      ]
+    }
+  ]
 }

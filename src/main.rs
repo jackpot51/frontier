@@ -177,4 +177,6 @@ fn main(){
     }
 
     handle.join().unwrap();
+
+    starship::save("res/ship_new.json", &*ship_lock.lock().unwrap()).unwrap();
 }
