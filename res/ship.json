@@ -114,7 +114,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230161488056183,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -125,7 +125,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230159997940063,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -136,7 +136,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.1623007208108902,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -147,7 +147,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230027377605438,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -158,7 +158,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.162301167845726,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -169,7 +169,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230159997940063,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -180,7 +180,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230027377605438,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -191,7 +191,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.1623007357120514,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -202,7 +202,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.1623007208108902,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -213,7 +213,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230203211307526,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -224,7 +224,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.162301167845726,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -235,7 +235,7 @@
           "kind": "Deck",
           "resources": {
             "free_air": {
-              "amount": 0.16230115294456482,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }
@@ -284,7 +284,7 @@
               "capacity": 5.0
             },
             "free_air": {
-              "amount": 0.16230247914791107,
+              "amount": 0.0,
               "capacity": 5.0
             }
           }

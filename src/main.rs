@@ -278,5 +278,5 @@ fn main(){
 
     handle.join().unwrap();
 
-    starship::save("res/ship_new.json", &*ship_lock.lock().unwrap()).unwrap();
+    starship::save("res/ship.json", &*ship_lock.lock().unwrap()).unwrap();
 }
