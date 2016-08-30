@@ -288,6 +288,148 @@
               "capacity": 5.0
             }
           }
+        },
+        {
+          "x": 16,
+          "y": 7,
+          "kind": "Deck",
+          "resources": {
+            "free_air": {
+              "amount": 4.993585109710693,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 16,
+          "y": 5,
+          "kind": "Tank",
+          "resources": {
+            "air": {
+              "amount": 37.84242630004883,
+              "capacity": 100.0
+            }
+          }
+        },
+        {
+          "x": 16,
+          "y": 6,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.891929268836975,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 4.999995708465576,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 16,
+          "y": 8,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.891545057296753,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 4.999995708465576,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 15,
+          "y": 8,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.8915739059448242,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 5.0,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 17,
+          "y": 8,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.8915739059448242,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 5.0,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 17,
+          "y": 7,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.891652226448059,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 4.999995708465576,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 15,
+          "y": 7,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.891652226448059,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 4.999995708465576,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 17,
+          "y": 6,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.89177668094635,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 5.0,
+              "capacity": 5.0
+            }
+          }
+        },
+        {
+          "x": 15,
+          "y": 6,
+          "kind": "Vent",
+          "resources": {
+            "air": {
+              "amount": 1.8917765617370605,
+              "capacity": 5.0
+            },
+            "free_air": {
+              "amount": 5.0,
+              "capacity": 5.0
+            }
+          }
         }
       ]
     },

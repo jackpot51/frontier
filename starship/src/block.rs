@@ -14,3 +14,14 @@ pub struct Block<'a> {
     pub kind: String,
     pub resources: BTreeMap<Cow<'a, str>, BlockResource>
 }
+
+impl<'a> Block<'a> {
+    pub fn new(x: usize, y: usize, kind: String) -> Block<'a> {
+        Block {
+            x: x,
+            y: y,
+            kind: kind,
+            resources: BTreeMap::new()
+        }
+    }
+}

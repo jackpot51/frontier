@@ -3,9 +3,11 @@ extern crate orbfont;
 extern crate orbimage;
 extern crate starship;
 
-use orbclient::{Color, EventOption, Window, K_UP, K_DOWN, K_ESC};
+use orbclient::{Color, EventOption, Window, K_UP, K_DOWN, K_DEL, K_ESC};
 use orbfont::Font;
 use orbimage::Image;
+
+use starship::block::{Block, BlockResource};
 
 use std::collections::BTreeMap;
 use std::cmp::max;
@@ -56,7 +58,7 @@ fn main(){
 
     let mut deck_i = 0;
     let mut dragging = None;
-    let mut mouse_down = false;
+    let mut editing = None;
 
     while running.load(Ordering::SeqCst) {
         {
@@ -106,12 +108,34 @@ fn main(){
                             let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
-                    } else if block.kind == "Floor" {
+                    } else if block.kind == "Deck" {
                         if let Some(resource) = block.resources.get("free_air") {
                             let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
                     }
+                }
+
+                if let Some(i) = dragging {
+                    if let Some(block) = deck.blocks.get(i) {
+                        let x = block.x as i32 * 32;
+                        let y = block.y as i32 * 32 + 32;
+
+                        window.rect(x, y, 32, 2, Color::rgb(255, 0, 0));
+                        window.rect(x, y, 2, 32, Color::rgb(255, 0, 0));
+                        window.rect(x, y + 30, 32, 2, Color::rgb(255, 0, 0));
+                        window.rect(x + 30, y, 2, 32, Color::rgb(255, 0, 0));
+                    }
+                }
+
+                if let Some((block_x, block_y)) = editing {
+                    let x = block_x as i32 * 32;
+                    let y = block_y as i32 * 32 + 32;
+
+                    window.rect(x, y, 32, 2, Color::rgb(0, 0, 255));
+                    window.rect(x, y, 2, 32, Color::rgb(0, 0, 255));
+                    window.rect(x, y + 30, 32, 2, Color::rgb(0, 0, 255));
+                    window.rect(x + 30, y, 2, 32, Color::rgb(0, 0, 255));
                 }
 
                 window.sync();
@@ -135,36 +159,112 @@ fn main(){
                                     deck_i -= 1;
                                     redraw.store(true, Ordering::SeqCst);
                                 },
-                                K_ESC => running.store(false, Ordering::SeqCst),
-                                _ => ()
-                            }
-                        },
-                        EventOption::Mouse(mouse_event) => if mouse_event.left_button {
-                            if ! mouse_down {
-                                println!("Click {}, {}", mouse_event.x, mouse_event.y);
-                                for (i, block) in deck.blocks.iter().enumerate() {
-                                    let x = block.x as i32 * 32;
-                                    let y = block.y as i32 * 32 + 32;
-                                    if mouse_event.x >= x && mouse_event.x < x + 32 && mouse_event.y >= y && mouse_event.y < y + 32 {
-                                        dragging = Some(i);
-                                        println!("    {:?}", block);
+                                K_DEL => if let Some((block_x, block_y)) = editing.take() {
+                                    let mut remove = None;
+                                    for (i, block) in deck.blocks.iter().enumerate() {
+                                        if block_x == block.x && block_y == block.y {
+                                            remove = Some(i);
+                                        }
+                                    }
+                                    if let Some(i) = remove {
+                                        deck.blocks.remove(i);
+                                    }
+                                },
+                                K_ESC => editing = None,
+                                _ => {
+                                    match key_event.character {
+                                        'A' | 'a' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Tank".to_string());
+                                            block.resources.insert("air".into(), BlockResource { amount: 100.0, capacity: 100.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        'E' | 'e' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Tank".to_string());
+                                            block.resources.insert("electricity".into(), BlockResource { amount: 100.0, capacity: 100.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        'F' | 'f' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Tank".to_string());
+                                            block.resources.insert("fuel".into(), BlockResource { amount: 100.0, capacity: 100.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        'W' | 'w' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Tank".to_string());
+                                            block.resources.insert("water".into(), BlockResource { amount: 100.0, capacity: 100.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        'C' | 'c' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Conduit".to_string());
+                                            block.resources.insert("air".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            block.resources.insert("electricity".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            block.resources.insert("fuel".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            block.resources.insert("water".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        'D' | 'd' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Deck".to_string());
+                                            block.resources.insert("free_air".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        'H' | 'h' => if let Some((block_x, block_y)) = editing.take() {
+                                            deck.blocks.push(Block::new(block_x, block_y, "Hull".to_string()));
+                                        },
+                                        'V' | 'v' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Vent".to_string());
+                                            block.resources.insert("air".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            block.resources.insert("free_air".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            deck.blocks.push(block);
+                                        },
+                                        _ => ()
                                     }
                                 }
-                            } else if let Some(i) = dragging {
+                            }
+                        },
+                        EventOption::Mouse(mouse_event) => {
+                            if mouse_event.left_button {
+                                if let Some(i) = dragging {
+                                    let x = max(mouse_event.x/32, 0) as usize;
+                                    let y = max((mouse_event.y - 32)/32, 0) as usize;
+
+                                    let block = &mut deck.blocks[i];
+                                    if block.x != x || block.y != y {
+                                        block.x = x;
+                                        block.y = y;
+                                        redraw.store(true, Ordering::SeqCst);
+                                    }
+                                } else {
+                                    println!("Left {}, {}", mouse_event.x, mouse_event.y);
+
+                                    for (i, block) in deck.blocks.iter().enumerate() {
+                                        let x = block.x as i32 * 32;
+                                        let y = block.y as i32 * 32 + 32;
+                                        if mouse_event.x >= x && mouse_event.x < x + 32 && mouse_event.y >= y && mouse_event.y < y + 32 {
+                                            dragging = Some(i);
+                                            println!("    {:?}", block);
+                                        }
+                                    }
+                                }
+                            } else {
+                                dragging = None;
+                            }
+
+                            if mouse_event.right_button {
                                 let x = max(mouse_event.x/32, 0) as usize;
                                 let y = max((mouse_event.y - 32)/32, 0) as usize;
 
-                                let block = &mut deck.blocks[i];
-                                if block.x != x || block.y != y {
-                                    block.x = x;
-                                    block.y = y;
-                                    redraw.store(true, Ordering::SeqCst);
+                                if editing != Some((x, y)) {
+                                    println!("Right {}, {}", mouse_event.x, mouse_event.y);
+                                    editing = Some((x, y));
+
+                                    for block in deck.blocks.iter() {
+                                        let x = block.x as i32 * 32;
+                                        let y = block.y as i32 * 32 + 32;
+                                        if mouse_event.x >= x && mouse_event.x < x + 32 && mouse_event.y >= y && mouse_event.y < y + 32 {
+                                            println!("    {:?}", block);
+                                        }
+                                    }
                                 }
                             }
-                            mouse_down = true;
-                        } else {
-                            dragging = None;
-                            mouse_down = false;
                         },
                         EventOption::Quit(_quit_event) => running.store(false, Ordering::SeqCst),
                         _ => ()
