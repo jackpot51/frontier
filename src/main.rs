@@ -9,6 +9,7 @@ use orbimage::Image;
 
 use starship::block::{Block, BlockResource};
 
+use std::borrow::Borrow;
 use std::collections::BTreeMap;
 use std::cmp::max;
 use std::fs;
@@ -36,7 +37,12 @@ fn main(){
         }
     }
 
-    assert!(ship_lock.lock().unwrap().decks.len() > 0);
+    let mut title;
+    {
+        let ship = ship_lock.lock().unwrap();
+        assert!(ship.decks.len() > 0);
+        title = font.render(&format!("{} - {} - {}", ship.name, ship.current_deck, ship.decks[ship.current_deck].name), 24.0);
+    }
 
     let running = Arc::new(AtomicBool::new(true));
     let redraw = Arc::new(AtomicBool::new(true));
@@ -58,7 +64,7 @@ fn main(){
 
     let mut dragging = None;
     let mut editing = None;
-    let mut show_info = false;
+    let mut show_info = true;
 
     while running.load(Ordering::SeqCst) {
         {
@@ -74,7 +80,6 @@ fn main(){
 
                 window.set(Color::rgb(255, 255, 255));
 
-                let title = font.render(&format!("{} - {} - {}", ship.name, ship.current_deck, deck.name), 24.0);
                 let title_x = (window_w - title.width()) as i32/2;
                 title.draw(&mut window, title_x, 0, Color::rgb(0, 0, 0));
 
@@ -91,28 +96,21 @@ fn main(){
                     }
 
                     if show_info {
-                        if block.kind == "Tank" {
-                            if let Some((name, resource)) = block.resources.iter().next() {
-                                let text = font.render(name, 16.0);
-                                text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
+                        let mut info_rect = |x: i32, y: i32, name: &str, resource: &BlockResource| {
+                            let color = match name {
+                                "air" => Color::rgb(0, 255, 0),
+                                "electricity" => Color::rgb(255, 255, 0),
+                                "free_air" => Color::rgb(0, 255, 255),
+                                "fuel" => Color::rgb(255, 0, 0),
+                                "water" => Color::rgb(0, 0, 255),
+                                _ => Color::rgb(255, 0, 255)
+                            };
+                            let dy = (28.0 * resource.amount/resource.capacity) as i32;
+                            window.rect(x, y + 28 - dy, 4, dy as u32, color);
+                        };
 
-                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
-                            }
-                        } else if block.kind == "Vent" {
-                            if let Some(resource) = block.resources.get("air") {
-                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
-                            }
-                            if let Some(resource) = block.resources.get("free_air") {
-                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
-                            }
-                        } else if block.kind == "Deck" || block.kind == "Man" {
-                            if let Some(resource) = block.resources.get("free_air") {
-                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
-                            }
+                        for (i, (name, resource)) in block.resources.iter().enumerate() {
+                            info_rect(x + 2 + i as i32 * 6, y + 2, name.borrow(), resource);
                         }
                     }
                 }
@@ -312,6 +310,7 @@ fn main(){
 
             if deck_i != ship.current_deck {
                 ship.current_deck = deck_i;
+                title = font.render(&format!("{} - {} - {}", ship.name, ship.current_deck, ship.decks[ship.current_deck].name), 24.0);
                 redraw.store(true, Ordering::SeqCst);
             }
 
