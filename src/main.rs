@@ -63,90 +63,91 @@ fn main(){
     while running.load(Ordering::SeqCst) {
         {
             let mut ship = ship_lock.lock().unwrap();
-            let mut deck_i = ship.current_deck;
-            let mut reload = false;
-            let mut save = false;
 
-            {
-                let name = ship.name.clone();
-                let deck_len = ship.decks.len();
-                let deck = &mut ship.decks[deck_i];
+            if redraw.load(Ordering::SeqCst) {
+                redraw.store(false, Ordering::SeqCst);
 
-                if redraw.load(Ordering::SeqCst) {
-                    redraw.store(false, Ordering::SeqCst);
+                let window_w = window.width();
+                //let window_h = window.height();
 
-                    let window_w = window.width();
-                    //let window_h = window.height();
+                let deck = &ship.decks[ship.current_deck];
 
-                    window.set(Color::rgb(255, 255, 255));
+                window.set(Color::rgb(255, 255, 255));
 
-                    let title = font.render(&format!("{} - {} - {}", name, deck_i, deck.name), 24.0);
-                    let title_x = (window_w - title.width()) as i32/2;
-                    title.draw(&mut window, title_x, 0, Color::rgb(0, 0, 0));
+                let title = font.render(&format!("{} - {} - {}", ship.name, ship.current_deck, deck.name), 24.0);
+                let title_x = (window_w - title.width()) as i32/2;
+                title.draw(&mut window, title_x, 0, Color::rgb(0, 0, 0));
 
-                    window.rect(0, 26, window_w, 2, Color::rgb(0, 0, 0));
+                window.rect(0, 26, window_w, 2, Color::rgb(0, 0, 0));
 
-                    for block in deck.blocks.iter() {
-                        let x = block.x as i32 * 32;
-                        let y = block.y as i32 * 32 + 32;
-                        if let Some(image) = block_kinds.get(&block.kind) {
-                            image.draw(&mut window, x, y);
-                        } else {
-                            window.rect(x, y, 32, 32, Color::rgb(128, 128, 128));
-                            font.render(&block.kind, 16.0).draw(&mut window, x, y, Color::rgb(0, 0, 0));
-                        }
+                for block in deck.blocks.iter() {
+                    let x = block.x as i32 * 32;
+                    let y = block.y as i32 * 32 + 32;
+                    if let Some(image) = block_kinds.get(&block.kind) {
+                        image.draw(&mut window, x, y);
+                    } else {
+                        window.rect(x, y, 32, 32, Color::rgb(128, 128, 128));
+                        font.render(&block.kind, 16.0).draw(&mut window, x, y, Color::rgb(0, 0, 0));
+                    }
 
-                        if show_info {
-                            if block.kind == "Tank" {
-                                if let Some((name, resource)) = block.resources.iter().next() {
-                                    let text = font.render(name, 16.0);
-                                    text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
+                    if show_info {
+                        if block.kind == "Tank" {
+                            if let Some((name, resource)) = block.resources.iter().next() {
+                                let text = font.render(name, 16.0);
+                                text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
 
-                                    let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                    text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
-                                }
-                            } else if block.kind == "Vent" {
-                                if let Some(resource) = block.resources.get("air") {
-                                    let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                    text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
-                                }
-                                if let Some(resource) = block.resources.get("free_air") {
-                                    let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                    text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
-                                }
-                            } else if block.kind == "Deck" || block.kind == "Man" {
-                                if let Some(resource) = block.resources.get("free_air") {
-                                    let text = font.render(&format!("{}", resource.amount as u32), 16.0);
-                                    text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
-                                }
+                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
+                                text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
+                            }
+                        } else if block.kind == "Vent" {
+                            if let Some(resource) = block.resources.get("air") {
+                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
+                                text.draw(&mut window, x, y, Color::rgb(0, 0, 0));
+                            }
+                            if let Some(resource) = block.resources.get("free_air") {
+                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
+                                text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
+                            }
+                        } else if block.kind == "Deck" || block.kind == "Man" {
+                            if let Some(resource) = block.resources.get("free_air") {
+                                let text = font.render(&format!("{}", resource.amount as u32), 16.0);
+                                text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                             }
                         }
                     }
-
-                    if let Some(i) = dragging {
-                        if let Some(block) = deck.blocks.get(i) {
-                            let x = block.x as i32 * 32;
-                            let y = block.y as i32 * 32 + 32;
-
-                            window.rect(x, y, 32, 2, Color::rgb(255, 0, 0));
-                            window.rect(x, y, 2, 32, Color::rgb(255, 0, 0));
-                            window.rect(x, y + 30, 32, 2, Color::rgb(255, 0, 0));
-                            window.rect(x + 30, y, 2, 32, Color::rgb(255, 0, 0));
-                        }
-                    }
-
-                    if let Some((block_x, block_y)) = editing {
-                        let x = block_x as i32 * 32;
-                        let y = block_y as i32 * 32 + 32;
-
-                        window.rect(x, y, 32, 2, Color::rgb(0, 0, 255));
-                        window.rect(x, y, 2, 32, Color::rgb(0, 0, 255));
-                        window.rect(x, y + 30, 32, 2, Color::rgb(0, 0, 255));
-                        window.rect(x + 30, y, 2, 32, Color::rgb(0, 0, 255));
-                    }
-
-                    window.sync();
                 }
+
+                if let Some(i) = dragging {
+                    if let Some(block) = deck.blocks.get(i) {
+                        let x = block.x as i32 * 32;
+                        let y = block.y as i32 * 32 + 32;
+
+                        window.rect(x, y, 32, 2, Color::rgb(255, 0, 0));
+                        window.rect(x, y, 2, 32, Color::rgb(255, 0, 0));
+                        window.rect(x, y + 30, 32, 2, Color::rgb(255, 0, 0));
+                        window.rect(x + 30, y, 2, 32, Color::rgb(255, 0, 0));
+                    }
+                }
+
+                if let Some((block_x, block_y)) = editing {
+                    let x = block_x as i32 * 32;
+                    let y = block_y as i32 * 32 + 32;
+
+                    window.rect(x, y, 32, 2, Color::rgb(0, 0, 255));
+                    window.rect(x, y, 2, 32, Color::rgb(0, 0, 255));
+                    window.rect(x, y + 30, 32, 2, Color::rgb(0, 0, 255));
+                    window.rect(x + 30, y, 2, 32, Color::rgb(0, 0, 255));
+                }
+
+                window.sync();
+            }
+
+            let mut deck_i = ship.current_deck;
+            let mut reload = false;
+            let mut save = false;
+            {
+                let deck_len = ship.decks.len();
+                let deck = &mut ship.decks[deck_i];
 
                 let mut evented = true;
                 while evented {
