@@ -3,8 +3,8 @@ use std::collections::BTreeMap;
 
 #[derive(Copy, Clone, Debug, Default, RustcDecodable, RustcEncodable)]
 pub struct BlockResource {
-    pub amount: f32,
-    pub capacity: f32
+    pub amount: f64,
+    pub capacity: f64
 }
 
 #[derive(Clone, Debug, RustcDecodable, RustcEncodable)]

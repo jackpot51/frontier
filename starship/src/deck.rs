@@ -14,8 +14,8 @@ struct Node<'a> {
     x: usize,
     y: usize,
     resource: Cow<'a, str>,
-    amount: f32,
-    capacity: f32,
+    amount: f64,
+    capacity: f64,
 }
 
 impl<'a> Node<'a> {
@@ -27,7 +27,7 @@ impl<'a> Node<'a> {
             || (self.x == other.x && self.y == other.y + 1); // below
     }
 
-    fn pressure(&self) -> f32 {
+    fn pressure(&self) -> f64 {
         return self.amount / self.capacity;
     }
 }
@@ -36,7 +36,7 @@ impl<'a> Node<'a> {
 struct Change {
     i: usize,
     j: usize,
-    pressure: f32
+    pressure: f64
 }
 
 impl<'a> Deck<'a> {
@@ -130,7 +130,43 @@ impl<'a> Deck<'a> {
         }
 
         // Update blocks from nodes
-        for node in nodes {
+        for mut node in nodes {
+            //If free air, check for vacuums
+            if node.resource == "free_air" && node.amount > 0.0 {
+                let ox = node.x as isize - 1;
+                let oy = node.y as isize - 1;
+
+                let mut neighbors: [[usize; 3]; 3] = [
+                    [0, 0, 0],
+                    [0, 0, 0],
+                    [0, 0, 0]
+                ];
+
+                for block in self.blocks.iter() {
+                    let i = block.x as isize - ox;
+                    let j = block.y as isize - oy;
+                    if i >= 0 && i < 3 && j >= 0 && j < 3 {
+                        neighbors[j as usize][i as usize] += 1;
+                    }
+                }
+
+                let mut vacuums = 0.0;
+                for (y, neighbor_row) in neighbors.iter().enumerate() {
+                    for (x, &neighbor) in neighbor_row.iter().enumerate() {
+                        if neighbor == 0 {
+                            vacuums += 1.0/((x as f64 - 1.0).powf(2.0) + (y as f64 - 1.0).powf(2.0)).sqrt();
+                        }
+                    }
+                }
+
+                if vacuums > 0.0 {
+                    let decay = 1.0 - vacuums/100.0;
+                    //println!("{}, {}: {} vacuums, {} amount, {} decay", node.x, node.y, vacuums, node.amount, decay);
+                    node.amount *= decay;
+                }
+            }
+
+            //Update block
             if let Some(mut resource) = self.blocks[node.i].resources.get_mut(&node.resource) {
                 resource.amount = node.amount;
             }

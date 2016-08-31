@@ -288,6 +288,18 @@
               "capacity": 5.0
             }
           }
+        },
+        {
+          "x": 7,
+          "y": 3,
+          "kind": "Hull",
+          "resources": {}
+        },
+        {
+          "x": 9,
+          "y": 3,
+          "kind": "Hull",
+          "resources": {}
         }
       ]
     },
