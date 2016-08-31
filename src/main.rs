@@ -111,7 +111,7 @@ fn main(){
                             let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
                         }
-                    } else if block.kind == "Deck" {
+                    } else if block.kind == "Deck" || block.kind == "Man" {
                         if let Some(resource) = block.resources.get("free_air") {
                             let text = font.render(&format!("{}", resource.amount as u32), 16.0);
                             text.draw(&mut window, x, y + 16, Color::rgb(0, 0, 0));
@@ -226,6 +226,12 @@ fn main(){
                                         },
                                         'H' | 'h' => if let Some((block_x, block_y)) = editing.take() {
                                             deck.blocks.push(Block::new(block_x, block_y, "Hull".to_string()));
+                                            redraw.store(true, Ordering::SeqCst);
+                                        },
+                                        'M' | 'm' => if let Some((block_x, block_y)) = editing.take() {
+                                            let mut block = Block::new(block_x, block_y, "Man".to_string());
+                                            block.resources.insert("free_air".into(), BlockResource { amount: 0.0, capacity: 5.0 });
+                                            deck.blocks.push(block);
                                             redraw.store(true, Ordering::SeqCst);
                                         },
                                         'V' | 'v' => if let Some((block_x, block_y)) = editing.take() {
