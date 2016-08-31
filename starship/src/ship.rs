@@ -3,8 +3,7 @@ use deck::Deck;
 #[derive(Clone, Debug, RustcDecodable, RustcEncodable)]
 pub struct Ship<'a> {
     pub name: String,
-    pub width: usize,
-    pub height: usize,
+    pub current_deck: usize,
     pub decks: Vec<Deck<'a>>
 }
 
